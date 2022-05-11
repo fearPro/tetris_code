@@ -838,10 +838,10 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 					if (fallSpeedModifier < 0.4) {
 						Thread.sleep(3);
 					} else {
-						if (fallSpeedModifier >= 0.4 && fallSpeedModifier < 0.7) {
-							Thread.sleep(10);
+						if (fallSpeedModifier >= 0.15 && fallSpeedModifier < 0.35) {
+							Thread.sleep(15);
 						} else {
-							if (fallSpeedModifier >= 0.7) {
+							if (fallSpeedModifier >= 0.35) {
 								Thread.sleep(20);
 							}
 						}

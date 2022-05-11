@@ -80,25 +80,25 @@ public class MyContentPane extends JPanel implements ActionListener {
 		this.add(txtScore);
 		
 		btnStart = new JButton("Start");
-		btnStart.setBounds(425, 120, 165, 100);
+		btnStart.setBounds(425, 160, 165, 400);
 		btnStart.setFont(new Font(null, Font.BOLD, 20));
 		btnStart.addActionListener(this);
 		this.add(btnStart);
 		
 		btnRestart = new JButton("Restart");
-		btnRestart.setBounds(425, 235, 165, 50);
+		btnRestart.setBounds(425, 617, 165, 50);
 		btnRestart.setFont(new Font(null, Font.BOLD, 20));
 		btnRestart.addActionListener(this);
 		this.add(btnRestart);		
 
 		btnNewGame = new JButton("New Game");
-		btnNewGame.setBounds(425, 300, 165, 50);
+		btnNewGame.setBounds(425, 677, 165, 50);
 		btnNewGame.setFont(new Font(null, Font.BOLD, 20));
 		btnNewGame.addActionListener(this);
 		this.add(btnNewGame);
 		
 		btnExit = new JButton("Exit");
-		btnExit.setBounds(425, 365, 165, 50);
+		btnExit.setBounds(425, 737, 165, 50);
 		btnExit.setFont(new Font(null, Font.BOLD, 20));
 		btnExit.addActionListener(this);
 		this.add(btnExit);
