@@ -86,11 +86,6 @@ public class GameOver extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnClose) {
-			try {
-				dbAccess.closeConnection();
-			} catch (SQLException e1) {
-
-			}
 			this.dispose();
 		}
 		if (e.getSource() == btnClear) {

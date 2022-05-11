@@ -7,20 +7,20 @@ import java.sql.Statement;
 
 public class DBAccess {
 
-	final private Connection connection;
+	private Connection connection;
 	private Object[][] data;
-
-	public DBAccess() throws SQLException {
-		this.connection = establishConnection();
-	}
 
 	public Object[][] getData() {
 		return this.data;
 	}
 
-	public Connection establishConnection() throws SQLException {
+	public void establishConnection() throws SQLException {
 		String dbPath = "jdbc:sqlite:highscores.db";
-		return DriverManager.getConnection(dbPath);
+		this.connection = DriverManager.getConnection(dbPath);
+	}
+	
+	public void closeConnection() throws SQLException { 
+		this.connection.close();
 	}
 
 	private int rowCounter() throws SQLException {
@@ -34,6 +34,7 @@ public class DBAccess {
 	}
 
 	public void selectAll() throws SQLException {
+		establishConnection();
 		data = new String[rowCounter()][2];
 
 		String sql = "SELECT * FROM tblHighscores";
@@ -48,24 +49,25 @@ public class DBAccess {
 			data[z][1] = score + "";
 			z++;
 		}
+		closeConnection();
 
 	}
 
 	public void insert(String name, int score) throws SQLException {
+		establishConnection();
 		String sql = "INSERT INTO tblHighscores(name,score) VALUES ('" + name + "','" + score + "')";
 		Statement statement = this.connection.createStatement();
 		statement.executeUpdate(sql);
+		closeConnection();
 	}
 
 	public void deleteEverything() throws SQLException {
+		establishConnection();
 		String sql = "DELETE FROM tblHighscores";
 		Statement statement = this.connection.createStatement();
 		statement.executeUpdate(sql);
+		closeConnection();
 
-	}
-	
-	public void closeConnection() throws SQLException { 
-		this.connection.close();
 	}
 
 }
