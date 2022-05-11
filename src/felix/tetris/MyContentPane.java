@@ -1,4 +1,5 @@
 package felix.tetris;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -101,6 +102,8 @@ public class MyContentPane extends JPanel implements ActionListener {
 		btnExit.setFont(new Font(null, Font.BOLD, 20));
 		btnExit.addActionListener(this);
 		this.add(btnExit);
+		
+		this.setBackground(new Color(255, 200, 200));
 
 	}
 	
@@ -134,6 +137,7 @@ public class MyContentPane extends JPanel implements ActionListener {
 			new MainFrame(this.playerName);			
 		}
 		if(e.getSource() == btnRestart) {
+			gameBoard.stopGame();
 			this.remove(gameBoard);
 			gameBoard.dispatchEvent(e); // ?
 			gameBoard = new GameBoard(this, this.difficulty.difficultyValue);

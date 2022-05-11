@@ -1,5 +1,6 @@
 package felix.tetris;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -58,6 +59,8 @@ public class GameOver extends JFrame implements ActionListener {
 		btnClear.setBounds(110, 280, 140, 30);
 		btnClear.addActionListener(this);
 		this.add(btnClear);
+		
+		this.getContentPane().setBackground(new Color(255, 200, 200));
 
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

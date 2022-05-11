@@ -73,7 +73,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 	 * diese Methode baut ein 2dimensionales array vom typ zelle jede Zelle bekommt
 	 * x und y koordinaten, und die information ob sie gerade gefüllt ist
 	 */
-	public void koordinaten() {
+	private void koordinaten() {
 		for (int j = 0; j < 16; j++) {
 			for (int i = 0; i < 31; i++) {
 				if (i == 30) {
@@ -104,7 +104,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		draw(g);
 	}
 
-	public void draw(final Graphics g) {
+	private void draw(final Graphics g) {
 		// Spielfeldraster -------------------------------
 		for (int i = 0; i < height / UNIT_SIZE; i++) {
 			g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, height);
@@ -118,7 +118,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 
 	}
 
-	public void vollgemaltWertAbfragenUndDannAusmalenOderNicht() {
+	private void vollgemaltWertAbfragenUndDannAusmalenOderNicht() {
 		for (Zelle[] reihe : matrix) {
 			for (Zelle zelle : reihe) {
 				if (zelle.getVollgemalt() != 0) {
@@ -128,7 +128,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		}
 	}
 
-	public void drawShape() {
+	private void drawShape() {
 		g.setColor(shape.getTetriColor());
 		for (int i = 0; i < 4; i++) {
 			g.fillRect(matrix[tetriY[i]][tetriX[i]].getXPos(), matrix[tetriY[i]][tetriX[i]].getYPos(), UNIT_SIZE,
@@ -175,7 +175,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 	}
 
 	@SuppressWarnings("incomplete-switch")
-	public void drehosaurusRex() {
+	private void drehosaurusRex() {
 		switch (this.tetri) {
 		case L_SHAPE:
 			switch (this.orientation) {
@@ -650,7 +650,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 
 	// -----------------------------------------------------------------------------------------
 
-	public void drehHilfe(int y0, int x0, int y1, int x1, int y2, int x2, int y3, int x3) {
+	private void drehHilfe(int y0, int x0, int y1, int x1, int y2, int x2, int y3, int x3) {
 		tetriY[0] = tetriY[0] + y0;
 		tetriX[0] = tetriX[0] + x0 + xCollModi;
 
@@ -665,7 +665,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		this.xCollModi = 0;
 	}
 
-	public void volleReiheCheck() {
+	private void volleReiheCheck() {
 		int scoreMultiplikator = 0;
 		int volleReiheCount = 16;
 		for (int i = 0; i < 31; i++) {
@@ -683,10 +683,11 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		this.score = this.score + (10 * scoreMultiplikator);
 		this.myContentPane.setTxtScore(this.score);
 		this.fallSpeedModifier = this.fallSpeedModifier + (0.02 * scoreMultiplikator);
-		System.out.println(score);
+		System.out.println(this.fallSpeedModifier);
+//		System.out.println(score);
 	}
 
-	public void reiheEntfernen(int welcheReihe) {
+	private void reiheEntfernen(int welcheReihe) {
 		for (int i = 0; i < 16; i++) {
 			matrix[welcheReihe][i].setVollgemalt(0);
 			matrix[welcheReihe][i].setBelegt(false);
@@ -696,7 +697,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 	}
 
 	// 0 -30
-	public void reihenVerschieben(int welcheReihe) {
+	private void reihenVerschieben(int welcheReihe) {
 		for (int i = welcheReihe; i > 0; i--) {
 			for (int j = 0; j < 16; j++) {
 				matrix[i][j].setVollgemalt(matrix[i - 1][j].getVollgemalt());
@@ -717,7 +718,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		}
 	}
 
-	public void fallenUndAblegen() {
+	private void fallenUndAblegen() {
 
 		if (matrix[tetriY[0]][tetriX[0]].getBoden() != true && matrix[tetriY[1]][tetriX[1]].getBoden() != true
 				&& matrix[tetriY[2]][tetriX[2]].getBoden() != true && matrix[tetriY[3]][tetriX[3]].getBoden() != true) {
@@ -759,7 +760,7 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		}
 	}
 
-	public void movement() {
+	private void movement() {
 		switch (direction) {
 		case 'D':
 			// horizontal stillstehen
@@ -801,21 +802,17 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 		case KeyEvent.VK_LEFT:
 			direction = 'L';
 			movement();
-//			System.out.println(direction);
 			break;
 		case KeyEvent.VK_RIGHT:
 			direction = 'R';
 			movement();
-//			System.out.println(direction);
 			break;
 		case KeyEvent.VK_UP:
 			direction = 'U';
 			movement();
-//			System.out.println(direction);
 			break;
 		case KeyEvent.VK_DOWN:
 			direction = 'S';
-//			System.out.println("SCHNELL");
 			break;
 		}
 	}
@@ -830,29 +827,27 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 	public void run() {
 		while (running) {
 			try {
-				movement();
+//				movement();
 
 				fallenUndAblegen();
 
 				repaint();
 				fallSpeedBasis += fallSpeedModifier; // fallenUndAblegen()
-//				System.out.println(fallUpdateBasis);
 
 				if (direction == 'S') {
 					if (fallSpeedModifier < 0.4) {
 						Thread.sleep(3);
 					} else {
 						if (fallSpeedModifier >= 0.4 && fallSpeedModifier < 0.7) {
-							Thread.sleep(7);
+							Thread.sleep(10);
 						} else {
 							if (fallSpeedModifier >= 0.7) {
-								Thread.sleep(10);
+								Thread.sleep(20);
 							}
 						}
 					}
 				} else {
 					Thread.sleep(drawSpeed);
-//					System.out.println(drawSpeed);
 				}
 
 			} catch (InterruptedException e) {
