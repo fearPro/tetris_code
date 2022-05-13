@@ -15,7 +15,8 @@ public class DBAccess {
 	}
 
 	public void establishConnection() throws SQLException {
-		String dbPath = "jdbc:sqlite:highscores.db";
+//		String dbPath = "jdbc:sqlite:highscores.db";
+		String dbPath = "jdbc:sqlite:assets/highscores.db";
 		this.connection = DriverManager.getConnection(dbPath);
 	}
 	

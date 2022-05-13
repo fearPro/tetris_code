@@ -767,11 +767,11 @@ public class GameBoard extends JPanel implements KeyListener, Runnable {
 			break;
 		case 'L':
 			nachLinks();
-			direction = 'D';
+//			direction = 'D';
 			break;
 		case 'R':
 			nachRechts();
-			direction = 'D';
+//			direction = 'D';
 			break;
 		case 'U':
 			if ((tetriY[0] < 30) && (tetriY[1] < 30) && (tetriY[2] < 30) && (tetriY[3] < 30)) {

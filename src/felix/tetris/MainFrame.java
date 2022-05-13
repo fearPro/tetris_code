@@ -60,7 +60,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("tetris_bild.png")); // pfad für export ändern
+//			img = ImageIO.read(new File("tetris_bild.png")); // pfad für export ändern
+			img = ImageIO.read(new File("assets/tetris_bild.png")); // pfad für export ändern
 		} catch (IOException e) {
 			// nix
 		}
